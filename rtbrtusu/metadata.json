@@ -1,0 +1,15 @@
+{
+  "name": "rtbrtusu",
+  "version": "0.0.1",
+  "author": "puppet@example.com",
+  "license": "All Rights Reserved",
+  "summary": "UNKNOWN",
+  "source": "UNKNOWN",
+  "project_page": "UNKNOWN",
+  "issues_url": "UNKNOWN",
+  "tags": ["rtbrtusu"],
+  "operatingsystem_support": [ "UNKNOWN" ],
+  "dependencies": [
+        { "name": "UNKNOWN" },
+ ]
+}

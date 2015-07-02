@@ -1,0 +1,63 @@
+# Added by "rtbrtusu/OverrideConfig.properties.erb"
+<%
+    # find our pod/silo
+    hostname =~ /^((dc1)?pd[0-9]{0,2})-(rtbs[0-9]{2}).*$/
+    server_pod=$1
+    server_group=$3
+
+    # Number of RTUSDB voldemort servers
+    case domain
+    when "sea1.audsci.net"
+        vold_count=5
+    when "hkg2.audsci.net"
+        vold_count=5
+    when "fra1.audsci.net"
+        vold_count=5
+    else
+        vold_count=0
+    end
+
+-%>
+
+#################################
+# RT UserStore Updater Settings #
+#################################
+<%
+    realtime_urls=""
+    
+    if domain == 'sea1.audsci.net'
+#        for vold_num in 1..rtusdb_count
+            # we put the first rtusdb vold node on silo 41 so add an offset of 40
+#            silo_num = vold_num+35
+            realtime_urls="tcp://pd0-rtbs36-rtusdb06.sea1.audsci.net:6666,tcp://pd0-rtbs37-rtusdb07.sea1.audsci.net:6666,tcp://pd0-rtbs38-rtusdb08.sea1.audsci.net:6666,tcp://pd0-rtbs39-rtusdb09.sea1.audsci.net:6666,tcp://pd0-rtbs40-rtusdb10.sea1.audsci.net:6666,tcp://pd0-rtbs41-rtusdb01.sea1.audsci.net:6666,tcp://pd0-rtbs42-rtusdb02.sea1.audsci.net:6666,tcp://pd0-rtbs43-rtusdb03.sea1.audsci.net:6666,tcp://pd0-rtbs44-rtusdb04.sea1.audsci.net:6666,tcp://pd0-rtbs45-rtusdb05.sea1.audsci.net:6666,"
+#        end
+        
+    else
+        # all other domains
+        for vold_num in 1..vold_count
+            # we put the first rtusdb vold node on silo 3 so add an offset of 2
+            silo_num = vold_num+2
+            realtime_urls+="tcp://#{server_pod}-rtbs%02d-rtusdb%02d.#{domain}:6666," % [silo_num,vold_num]
+        end
+    end
+    #remove trailing comma
+    realtime_urls=realtime_urls[0..-2]
+-%>
+apollo.realtimeUserStore.voldemort.urls=<%= realtime_urls %>
+
+####################
+# Voldemort Config #
+####################
+<%
+    voldemort_urls=""
+    for vold_num in 1..vold_count
+        voldemort_urls+="tcp://#{server_pod}-voldemort%02d.#{domain}:6666," % [vold_num]
+
+    end
+    #remove trailing comma
+    voldemort_urls=voldemort_urls[0..-2]
+-%>
+apollo.readonlyUserStore.voldemort.urls=<%= voldemort_urls %>
+
+# End of "rtbrtusu/OverrideConfig.properties.erb"
+
