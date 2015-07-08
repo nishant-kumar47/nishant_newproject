@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ###
 # This start script starts up the RTB UserUpdater daemon.
@@ -24,7 +24,7 @@ export APP_OUT_SYM="${APP_LOG_BASE}/${APPUSER}_stdout_latest.log"
 export APP_ALERT="${APP_LOG_BASE}/${APPUSER}-alert.log"
 export APP_ALERT_SYM="${APP_LOG_BASE}/${APPUSER}_alert_latest.log"
 #java options
-export FREQ_JVM_OPTS=" -Xms6144m -Xmx6144m -Dlog.dir=${APP_LOG_BASE} -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9012 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false "
+export FREQ_JVM_OPTS=" -Xms61m -Xmx61m -Dlog.dir=${APP_LOG_BASE} -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9012 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false "
 
 # Specific to this app
 export PIDFILE="/var/rsi/run/${APPUSER}/${APPNAME}.pid"
