@@ -1,0 +1,6 @@
+[asci]
+name=ASCI repo
+baseurl=http://172.21.17.54:8081/repos/production/rpm/asci6
+enabled=1
+priority=99
+gpgcheck=0

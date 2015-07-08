@@ -9,11 +9,11 @@
 class jdk($package='jdk') {
 
 ## install ##
-#    package {
-#        "${package}":
+    package {
+        "${package}":
 
-#ensure => present
-#    }
+ensure => present
+    }
 
 
 ## config ##

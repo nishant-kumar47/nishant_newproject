@@ -4,11 +4,12 @@
 #####
 
 class rtbrtusu::prod::install {
-    include jdk::jdk6u29
+    include jdk::jdk7u60
 #    Asci_users::Pupuser <| title == rtuserfeed |>
 
     package {
-        "unzip": ensure => present;
+        "unzip": ensure => present,
+	         require => Class["jdk"] 
     }
 }
 
@@ -32,7 +33,7 @@ class rtbrtusu::prod::common {
     File {
         owner   => rtuserfeed,
         group   => rtuserfeed,
-#        require => Class["jdk"]
+        require => Class["jdk"]
     }
 
     $rtbrtusu_dirs = [
@@ -214,6 +215,7 @@ class rtbrtusu::prod::service {
 }
 
 class rtbrtusu {
+    include repo
     include rtbrtusu::prod::install,
       rtbrtusu::prod::common,
             rtbrtusu::prod::service,

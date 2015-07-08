@@ -8,7 +8,7 @@
 class jdk::jdk7u60 {
     class {
         "jdk":
-            package => 'jdk-1.7.0_60',
+            package => 'jdk-1.7.0_79',
     }
 }
 
